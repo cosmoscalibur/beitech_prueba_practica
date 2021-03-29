@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="form-wrapper">
+    <h2 class="title">Consultar órdenes</h2>
+
+    <form method="POST" action="{{ url_for('customer_orders') }}">
+
+        <fieldset class="form-field">
+            {{ form.customer_id.label }}
+            {{ form.customer_id(size=1) }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.bdate.label }}
+            {{ form.bdate }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.edate.label }}
+            {{ form.edate }}
+        </fieldset>
+
+        {{ form.submit }}
+
+    </form>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="form-wrapper">
+    <h2 class="title">Crear orden</h2>
+
+    <form name="form_create" method="POST" action="{{ url_for('customer_orders') }}"">
+
+        <fieldset class="form-field">
+            {{ form.customer_id.label }}
+            {{ form.customer_id(size=1) }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.creation_date.label }}
+            {{ form.creation_date }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.product_id_1.label }}
+            {{ form.product_id_1 }}
+        </fieldset>
+        <fieldset class="form-field">
+            {{ form.quantity_1.label }}
+            {{ form.quantity_1 }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.product_id_2.label }}
+            {{ form.product_id_2 }}
+        </fieldset>
+        <fieldset class="form-field">
+            {{ form.quantity_2.label }}
+            {{ form.quantity_2 }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.product_id_3.label }}
+            {{ form.product_id_3 }}
+        </fieldset>
+        <fieldset class="form-field">
+            {{ form.quantity_3.label }}
+            {{ form.quantity_3 }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.product_id_4.label }}
+            {{ form.product_id_4 }}
+        </fieldset>
+        <fieldset class="form-field">
+            {{ form.quantity_4.label }}
+            {{ form.quantity_4 }}
+        </fieldset>
+
+        <fieldset class="form-field">
+            {{ form.product_id_5.label }}
+            {{ form.product_id_5 }}
+        </fieldset>
+        <fieldset class="form-field">
+            {{ form.quantity_5.label }}
+            {{ form.quantity_5 }}
+        </fieldset>
+
+        {{ form.submit }}
+
+    </form>
+    <script>
+    let customer_id_select = document.getElementById("customer_id");
+    let product_id_1_select = document.getElementById("product_id_1");
+    let product_id_2_select = document.getElementById("product_id_2");
+    let product_id_3_select = document.getElementById("product_id_3");
+    let product_id_4_select = document.getElementById("product_id_4");
+    let product_id_5_select = document.getElementById("product_id_5");
+    customer_id_select.onchange = function() {
+        customer = customer_id_select.value;
+        fetch('/product/' + customer).then(function(response){
+            response.json().then(function(data){
+                let optionHTML = "";
+                for (let product of data.products){
+                    optionHTML += '<option value="' + product.product_id + '">' + product.name + '</option>';
+                }
+                product_id_1_select.innerHTML = optionHTML;
+                product_id_2_select.innerHTML = optionHTML;
+                product_id_3_select.innerHTML = optionHTML;
+                product_id_4_select.innerHTML = optionHTML;
+                product_id_5_select.innerHTML = optionHTML;
+            });
+        });
+
+    }
+    </script>
+  </div>
+
+{% endblock %}
