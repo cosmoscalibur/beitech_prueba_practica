@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms.fields.html5 import DateField
-from wtforms import SubmitField, SelectField, IntegerField
-from wtforms.validators import InputRequired, NumberRange
+from wtforms import SubmitField, SelectField, IntegerField, StringField
+from wtforms.validators import InputRequired, NumberRange, Length
 from pathlib import Path
 import beitech_app
 import beitech_app.database as dbman
@@ -33,7 +33,7 @@ class OrdersForm(FlaskForm):
         "Fecha final",
         [InputRequired(message="Se requiere de una fecha final de búsqueda")],
     )
-    submit = SubmitField("Submit")
+    submit = SubmitField("Consultar")
 
 
 class CreateForm(FlaskForm):
@@ -49,6 +49,8 @@ class CreateForm(FlaskForm):
         "Fecha de creación",
         [InputRequired(message="Se requiere ingresar fecha de creación")],
     )
+
+    delivery_address = StringField("Dirección de entrega", [InputRequired(message="Se requiere dirección de entrega"), Length(max=191)])
 
     pr_choices = [(item["product_id"], item["name"]) for item in dbman.get_customer_products(1)]
 
@@ -89,4 +91,4 @@ class CreateForm(FlaskForm):
         [NumberRange(min=0, max=1e9)],
         description="Unidades de producto 1",
     )
-    submit = SubmitField("Submit")
+    submit = SubmitField("Crear")
