@@ -39,8 +39,14 @@ def get_products():
     return dbobj.get_json("select product_id, name from public.product")
 
 
-def get_customer_products():
-    return dbobj.get_json("select product_id, customer_id from public.customer_product")
+def get_customer_products(customer_id):
+    return dbobj.get_json(f"""
+    select cp.product_id, pr.name
+    from public.customer_product cp
+    left join public.product pr
+    on cp.product_id = pr.product_id
+    where cp.customer_id = {customer_id}
+    """)
 
 
 def get_customer_orders(customer_id: int, bdate: str, edate: str):
