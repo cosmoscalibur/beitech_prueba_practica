@@ -6,7 +6,7 @@ AS $$
     select creation_date, po.order_id, total, delivery_address, od.products
     from public.order po
     left join 
-    (select order_id, string_agg(quantity::text || ' x ' || pr.name, '\n') as products
+    (select order_id, string_agg(quantity::text || ' x ' || pr.name, ',') as products
     from public.order_detail pod
     left join public.product pr
     on pod.product_id = pr.product_id
