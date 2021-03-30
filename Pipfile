@@ -7,12 +7,15 @@ name = "pypi"
 flask = "*"
 flask-wtf = "*"
 psycopg2-binary = "*"
+flasgger = "*"
 
 [dev-packages]
 black = "*"
 pylama = "*"
 httpx = "*"
-flasgger = "*"
+pylint = "*"
+graphviz = "*"
+pydot = "*"
 
 [requires]
 python_version = "3.8"
