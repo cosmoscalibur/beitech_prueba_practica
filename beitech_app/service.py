@@ -95,17 +95,19 @@ def create_order():
             customer_orders=[customer_orders[-1]],
         )
     else:
-        customer_id = int(request.args.get["customer_id"])
-        delivery_address = request.args.get["delivery_address"]
-        creation_date = request.args.get["creation_date"]
+        print(request.args)
+        customer_id = int(request.args.get("customer_id"))
+        delivery_address = request.args.get("delivery_address")
+        creation_date = request.args.get("creation_date")
         product_quantity = [
             (
-                int(request.args.get[f"product_id_{i}"]),
-                int(request.args.get[f"quantity_{i}"]),
+                int(request.args.get(f"product_id_{i}")),
+                int(request.args.get(f"quantity_{i}")),
             )
             for i in range(1, 6)
-            if request.args.get[f"quantity_{i}"] != ""
+            if f"quantity_{i}" in request.args != ""
         ]
+        print("funciona")
         order_id = dbman.query_create_order(
             [customer_id, delivery_address, creation_date, product_quantity]
         )
