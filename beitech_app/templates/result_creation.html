@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="form-wrapper">
+    <h2 class="title">Orden creada</h2>
+
+    <table>
+        <tr>
+            <th>Creation Date</th>
+            <th>Order ID</th>
+            <th>Total $</th>
+            <th>Delivery Address</th>
+            <th>Products</th>
+        </tr>
+        {% if customer_orders is not none %}
+            {% for co in customer_orders %}
+            <tr>
+                <td>{{co['creation_date']}}</td>
+                <td>{{co['order_id']}}</td>
+                <td>{{co['total']}}</td>
+                <td>{{co['delivery_address']}}</td>
+                <td>{{co['products'].replace(",", "<br>")|safe}}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+  </div>
+
+{% endblock %}
