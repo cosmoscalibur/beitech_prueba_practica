@@ -1,0 +1,3 @@
+pgmodeler
+python3-pip
+graphviz
