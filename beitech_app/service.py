@@ -37,7 +37,7 @@ def home():
 
 
 @app.route("/customer_orders", methods=["GET", "POST"])
-@swag_from("customer_orders.yml")
+@swag_from("swagger/customer_orders.yml", methods=['GET'])
 def customer_orders():
     if request.method == "POST":
         customer_id = int(request.form["customer_id"])
@@ -63,14 +63,14 @@ def form_list_orders():
     return render_template("form_list_orders.html", form=form, template="form-template")
 
 
-@app.route("/product/<int:customer>")
-@swag_from("product.yml")
-def product(customer):
-    return jsonify({"products": dbman.get_customer_products(customer)})
+@app.route("/product/<int:customer_id>")
+@swag_from("swagger/product.yml")
+def product(customer_id):
+    return jsonify({"products": dbman.get_customer_products(customer_id)})
 
 
 @app.route("/create_order", methods=["GET", "POST"])
-@swag_from("create_order.yml")
+@swag_from("swagger/create_order.yml", methods=['GET'])
 def create_order():
     if request.method == "POST":
         customer_id = int(request.form["customer_id"])
