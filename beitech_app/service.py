@@ -2,6 +2,7 @@ from pathlib import Path
 import datetime
 import json
 from flask import Flask, request, jsonify, url_for, render_template, redirect
+from flasgger import swag_from
 
 try:
     import beitech_app
@@ -36,6 +37,7 @@ def home():
 
 
 @app.route("/customer_orders", methods=["GET", "POST"])
+@swag_from("customer_orders.yml")
 def customer_orders():
     if request.method == "POST":
         customer_id = int(request.form["customer_id"])
@@ -43,7 +45,7 @@ def customer_orders():
         edate = request.form["edate"]
         customer_orders = dbman.get_customer_orders(customer_id, bdate, edate)
         return render_template(
-            "result_orders.html",
+            "customer_orders.html",
             template="form-template",
             customer_orders=customer_orders,
         )
@@ -54,20 +56,22 @@ def customer_orders():
         return jsonify(dbman.get_customer_orders(customer_id, bdate, edate))
 
 
-@app.route("/list_orders")
-def list_orders():
+@app.route("/form_list_orders")
+def form_list_orders():
     """Standard `contact` form."""
     form = OrdersForm()
-    return render_template("query_orders.html", form=form, template="form-template")
+    return render_template("form_list_orders.html", form=form, template="form-template")
 
 
 @app.route("/product/<int:customer>")
+@swag_from("product.yml")
 def product(customer):
     return jsonify({"products": dbman.get_customer_products(customer)})
 
 
-@app.route("/order_summary", methods=["GET", "POST"])
-def order_summary():
+@app.route("/create_order", methods=["GET", "POST"])
+@swag_from("create_order.yml")
+def create_order():
     if request.method == "POST":
         customer_id = int(request.form["customer_id"])
         delivery_address = request.form["delivery_address"]
@@ -86,7 +90,7 @@ def order_summary():
             customer_id, bdate.strftime("%Y-%m-%d"), edate.strftime("%Y-%m-%d")
         )
         return render_template(
-            "result_creation.html",
+            "order_summary.html",
             template="form-template",
             customer_orders=[customer_orders[-1]],
         )
@@ -108,10 +112,10 @@ def order_summary():
         return jsonify(order_id)
 
 
-@app.route("/create_order")
-def create_order():
+@app.route("/form_create_order")
+def form_create_order():
     form = CreateForm()
-    return render_template("create_order.html", form=form, template="form-template")
+    return render_template("form_create_order.html", form=form, template="form-template")
 
 
 if __name__ == "__main__":

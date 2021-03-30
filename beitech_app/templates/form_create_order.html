@@ -8,7 +8,7 @@
     producto de las listas disponibles y diligencie su respectiva cantidad.<br>
     Inicie desde "Producto 1". Los productos sin cantidad diligenciada son omitidos.
 
-    <form method="POST" action="{{ url_for('order_summary') }}">
+    <form method="POST" action="{{ url_for('create_order') }}">
 
         <fieldset class="form-field">
             {{ form.customer_id.label }}
