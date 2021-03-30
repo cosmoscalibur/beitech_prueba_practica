@@ -1,0 +1,49 @@
+parameters:
+  - in: query
+    name: customer_id
+    description: Identificador del cliente
+    schema:
+      type: integer
+      format: int64
+    required: true
+  - in: query
+    name: bdate
+    description: Fecha inicial del intervalo de búsqueda
+    schema:
+      type: string
+      format: date
+    required: true
+  - in: query
+    name: edate
+    description: Fecha final del intervalo de búsqueda
+    schema:
+      type: string
+      format: date
+    required: true
+responses:
+  '200':
+    description: Órdenes del cliente en el lapso de tiempo estipulado
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            order_id:
+              type: interger
+              format: int64
+            creation_date:
+              type: string
+              format: date
+            delivery_address:
+              type: string
+            products:
+              type: string
+            total:
+              type: integer
+              format: int64
+          requiered:
+            - order_id
+            - creation_date
+            - delivery_address
+            - products
+            - total

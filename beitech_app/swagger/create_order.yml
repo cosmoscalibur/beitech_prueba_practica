@@ -1,0 +1,99 @@
+parameters:
+  - in: query
+    name: customer_id
+    description: Identificador del cliente
+    schema:
+      type: integer
+      format: int64
+    required: true
+  - in: query
+    name: creation_date
+    description: Fecha de creación de la orden
+    schema:
+      type: string
+      format: date
+    required: true
+  - in: query
+    name: delivery_address
+    description: Dirección de entrega de la solicitud
+    schema:
+      type: string
+    required: true
+  - in: query
+    name: product_id_1
+    description: Nombre de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+  - in: query
+    name: quantity_1
+    description: Cantidad de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+  - in: query
+    name: product_id_2
+    description: Nombre de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+  - in: query
+    name: quantity_2
+    description: Cantidad de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+  - in: query
+    name: product_id_3
+    description: Nombre de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+  - in: query
+    name: quantity_3
+    description: Cantidad de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+  - in: query
+    name: product_id_4
+    description: Nombre de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+  - in: query
+    name: quantity_4
+    description: Cantidad de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+  - in: query
+    name: product_id_5
+    description: Nombre de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+  - in: query
+    name: quantity_5
+    description: Cantidad de producto
+    schema:
+      type: integer
+      format: int64
+    requiered: true
+responses:
+  '200':
+    description: Órdenes del cliente en el lapso de tiempo estipulado
+    content:
+      application/json:
+        schema:
+          type: integer
+          format: int64

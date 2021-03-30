@@ -1,0 +1,23 @@
+parameters:
+  - in: path
+    name: customer_id
+    description: Identificador del cliente
+    schema:
+      type: integer
+      format: int64
+    required: true
+responses:
+  '200':
+    description: Consulta de productos disponibles para el cliente
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            product_id:
+              type: integer
+              format: int64
+            name: string
+          requiered:
+            - product_id
+            - name
