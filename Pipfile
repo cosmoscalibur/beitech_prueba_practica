@@ -7,11 +7,11 @@ name = "pypi"
 flask = "*"
 flask-wtf = "*"
 psycopg2-binary = "*"
-httpx = "*"
 
 [dev-packages]
 black = "*"
 pylama = "*"
+httpx = "*"
 flasgger = "*"
 
 [requires]
