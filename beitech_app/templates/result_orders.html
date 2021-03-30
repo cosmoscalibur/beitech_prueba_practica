@@ -13,15 +13,17 @@
             <th>Delivery Address</th>
             <th>Products</th>
         </tr>
-        {% for co in customer_orders %}
-        <tr>
-            <td>{{co['creation_date']}}</td>
-            <td>{{co['order_id']}}</td>
-            <td>{{co['total']}}</td>
-            <td>{{co['delivery_address']}}</td>
-            <td>{{co['products']}}</td>
-        </tr>
-        {% endfor %}
+        {% if customer_orders is not none %}
+            {% for co in customer_orders %}
+            <tr>
+                <td>{{co['creation_date']}}</td>
+                <td>{{co['order_id']}}</td>
+                <td>{{co['total']}}</td>
+                <td>{{co['delivery_address']}}</td>
+                <td>{{co['products'].replace(",", "<br>")|safe}}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
     </table>
   </div>
 
