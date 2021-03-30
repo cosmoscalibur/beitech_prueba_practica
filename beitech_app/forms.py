@@ -3,6 +3,7 @@ from wtforms.fields.html5 import DateField
 from wtforms import SubmitField, SelectField, IntegerField, StringField
 from wtforms.validators import InputRequired, NumberRange, Length
 from pathlib import Path
+import datetime
 import beitech_app
 import beitech_app.database as dbman
 import json
@@ -25,13 +26,19 @@ class OrdersForm(FlaskForm):
         coerce=int,
         choices=[(item["customer_id"], item["name"]) for item in customers],
     )
+    edate_default = datetime.date.today()
+    bdate_default = edate_default - datetime.timedelta(days=30)
     bdate = DateField(
         "Fecha inicial",
         [InputRequired(message="Se requiere de una fecha inicial de búsqueda")],
+        format="%Y-%m-%d",
+        default=bdate_default
     )
     edate = DateField(
         "Fecha final",
         [InputRequired(message="Se requiere de una fecha final de búsqueda")],
+        format="%Y-%m-%d",
+        default=edate_default
     )
     submit = SubmitField("Consultar")
 
@@ -48,6 +55,8 @@ class CreateForm(FlaskForm):
     creation_date = DateField(
         "Fecha de creación",
         [InputRequired(message="Se requiere ingresar fecha de creación")],
+        format="%Y-%m-%d",
+        default=datetime.date.today()
     )
 
     delivery_address = StringField("Dirección de entrega", [InputRequired(message="Se requiere dirección de entrega"), Length(max=191)])
